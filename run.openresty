@@ -1,0 +1,15 @@
+export nginx=/usr/local/openresty/nginx
+
+docker rm -f nginx3f
+docker run -d --name="nginx3f" \
+	--net=host \
+	-v $(pwd)/nginx.conf.openresty:$nginx/conf/nginx.conf:ro \
+	-v $(pwd)/jpg.jpg:/opt/openresty/nginx/jpg.jpg:ro \
+	-v $(pwd)/mp3.mp3:/opt/openresty/nginx/mp3.mp3:ro \
+	-v $(pwd)/public:/public:rw \
+	-v $(pwd)/logs:/opt/openresty/nginx/logs \
+	-v $(pwd)/upload2.lua:/my_lua/upload2.lua \
+	-v $(pwd)/auth.lua:/my_lua/auth.lua \
+	openresty/openresty
+
+docker logs -f nginx3f

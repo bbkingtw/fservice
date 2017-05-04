@@ -1,0 +1,2 @@
+curl -F "file=@$1" localhost:8085/upload
+ls -l public
